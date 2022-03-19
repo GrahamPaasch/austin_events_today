@@ -10,9 +10,18 @@ while more_pages:
     events = tree.xpath('//div[@class="ds-event-time dtstart"]/text()')
     more_pages = False
 
-event_times = [event.replace("\n","").strip().split(' ')[0] for event in events]
+event_times = [event.replace("\n","").strip().split(' ')[0].upper() for event in events]
 
-event_times.sort()
+def numbers_only(time):
+    return int(time.replace(":","").replace("AM","").replace("PM",""))
 
-for time in event_times:
-    print(time)
+event_times.sort(key=numbers_only)
+
+am_events = [time for time in event_times if "AM" in time]
+pm_events = [time for time in event_times if "PM" in time]
+
+for event in am_events:
+    print(event)
+for event in pm_events:
+    print(event)
+

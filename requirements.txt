@@ -1,2 +1,3 @@
 requests
 ipython
+lxml

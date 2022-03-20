@@ -64,7 +64,7 @@ def main():
                 time24 = final_answer[0]
                 time12 = datetime.strptime(time24, "%H:%M")
                 out_time = datetime.strftime(time12, "%I:%M %p")
-                output.append([out_time, final_answer[1]])
+                output.append(f"{out_time} | {final_answer[1]}")
             else:
                 continue
         else:
@@ -75,12 +75,12 @@ def main():
             time24 = final_answer[0]
             time12 = datetime.strptime(time24, "%H:%M")
             out_time = datetime.strftime(time12, "%I:%M %p")
-            output.append([out_time, final_answer[1]])
+            output.append(f"{out_time} | {final_answer[1]}")
         if '01:' in final_answer[0]:
             time24 = final_answer[0]
             time12 = datetime.strptime(time24, "%H:%M")
             out_time = datetime.strftime(time12, "%I:%M %p")
-            output.append([out_time, final_answer[1]])
+            output.append(f"{out_time} | {final_answer[1]}")
     
     return '\n'.join(output)
 

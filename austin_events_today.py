@@ -1,4 +1,4 @@
-from lxml import html
+from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
 
@@ -10,16 +10,29 @@ while page_number < 1000:
     page_number += 1
     print(f"Gathered from page {page_number}!")
     html_page = requests.get(f'https://do512.com/events/today/?page={page_number}')
-    tree = html.fromstring(html_page.content)
-    # Grab the events and the start times from the HTML
-    events = tree.xpath('//div[@itemprop="event"]')
-    start_times = tree.xpath('//div[@class="ds-event-time dtstart"]/text()')
-    # Map together the events and the start times
-    mapped_events_and_times = [[start_time.replace("\n","").strip().split(' ')[0].upper(), f"https://do512.com{event.get('data-permalink')}"] for event, start_time in zip(events, start_times)]
-    # Finish gathering data if the url goes to a blank page
-    if not mapped_events_and_times:
+    soup = BeautifulSoup(html_page.text, 'html.parser')
+    # Grab HTML div for each event that contains the event links and the start times
+    events = soup.findAll('div',attrs={'itemprop':'event'})
+    # If no events are found, terminate the loop
+    if len(events) == 0:
         print("All data gathered!")
         break
+    # Map together the events and the start times
+    mapped_events_and_times = []
+    for event in events:
+        try:
+            mapped_events_and_times.append(
+                [
+                    event.find(
+                        'div',attrs={'class':'ds-event-time dtstart'}
+                        ).getText().replace(
+                            "\n",""
+                            ).strip().split(' ')[0].upper(), 
+                    f"https://do512.com{event.get('data-permalink')}"
+                ]
+            )
+        except:
+            continue
     # Give back data in a list of lists
     data.extend(mapped_events_and_times)
 

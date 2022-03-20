@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import requests
 
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = "TLS13-CHACHA20-POLY1305-SHA256:TLS13-AES-128-GCM-SHA256:TLS13-AES-256-GCM-SHA384:ECDHE:!COMPLEMENTOFDEFAULT"
+
 page_number = 0
 data = []
 print("Gathering data!")

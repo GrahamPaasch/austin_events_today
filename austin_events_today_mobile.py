@@ -63,8 +63,8 @@ def main():
             if '01:' not in final_answer[0]:
                 time24 = final_answer[0]
                 time12 = datetime.strptime(time24, "%H:%M")
-                out_time = datetime.strftime(time12, "%I:%M %p")
-                output += f"@{out_time} -> {final_answer[1]} | "
+                out_time = datetime.strftime(time12, "%I:%M%p")
+                output += f"@{out_time}:{final_answer[1]} </br> "
             else:
                 continue
         else:
@@ -74,13 +74,13 @@ def main():
         if '00:' in final_answer[0]:
             time24 = final_answer[0]
             time12 = datetime.strptime(time24, "%H:%M")
-            out_time = datetime.strftime(time12, "%I:%M %p")
-            output += f"@{out_time} -> {final_answer[1]} | "
+            out_time = datetime.strftime(time12, "%I:%M%p")
+            output += f"@{out_time}:{final_answer[1]} </br> "
         if '01:' in final_answer[0]:
             time24 = final_answer[0]
             time12 = datetime.strptime(time24, "%H:%M")
-            out_time = datetime.strftime(time12, "%I:%M %p")
-            output += f"@{out_time} -> {final_answer[1]} | "
+            out_time = datetime.strftime(time12, "%I:%M%p")
+            output += f"@{out_time}:{final_answer[1]} </br> "
     
     return output
 

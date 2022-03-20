@@ -56,7 +56,7 @@ def main():
 
     final_answers.sort(key=sorting_key)
 
-    output = []
+    output = ""
 
     for final_answer in final_answers:
         if '00:' not in final_answer[0]:
@@ -64,7 +64,7 @@ def main():
                 time24 = final_answer[0]
                 time12 = datetime.strptime(time24, "%H:%M")
                 out_time = datetime.strftime(time12, "%I:%M %p")
-                output.append(f"{out_time} | {final_answer[1]}")
+                output += f"@{out_time} -> {final_answer[1]} | "
             else:
                 continue
         else:
@@ -75,13 +75,13 @@ def main():
             time24 = final_answer[0]
             time12 = datetime.strptime(time24, "%H:%M")
             out_time = datetime.strftime(time12, "%I:%M %p")
-            output.append(f"{out_time} | {final_answer[1]}")
+            output += f"@{out_time} -> {final_answer[1]} | "
         if '01:' in final_answer[0]:
             time24 = final_answer[0]
             time12 = datetime.strptime(time24, "%H:%M")
             out_time = datetime.strftime(time12, "%I:%M %p")
-            output.append(f"{out_time} | {final_answer[1]}")
+            output += f"@{out_time} -> {final_answer[1]} | "
     
-    return '\n'.join(output)
+    return output
 
 run(host='localhost', port=8080)

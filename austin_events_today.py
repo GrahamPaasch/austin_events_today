@@ -5,7 +5,7 @@ import requests
 page_number = 0
 data = []
 print("Gathering data!")
-while page_number < 5:
+while page_number < 1000:
     # Get the page HTML
     page_number += 1
     print(f"Gathered from page {page_number}!")

@@ -82,6 +82,6 @@ def main():
             out_time = datetime.strftime(time12, "%I:%M %p")
             output.append([out_time, final_answer[1]])
     
-    return output
+    return '\n'.join(output)
 
 run(host='localhost', port=8080)
